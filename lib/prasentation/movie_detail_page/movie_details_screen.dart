@@ -30,9 +30,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
         builder: (context, state) {
           if (state is MovieLoading) {
             return const Center(
-              child: CircularProgressIndicator(
-                color: AppColors.white,
-              ),
+              child: CircularProgressIndicator(color: AppColors.white),
             );
           }
 
@@ -55,9 +53,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                     alignment: Alignment.topLeft,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage(
-                          "$baseUrl${movie.posterPath}",
-                        ),
+                        image: NetworkImage("$baseUrl${movie.posterPath}"),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -129,7 +125,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                         padding: const EdgeInsets.all(4),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
-                          color: Colors.red,
+                          color: getRatingColor(movie.voteAverage),
                         ),
                         child: Text(
                           "IMDB: ${movie.voteAverage}",
@@ -167,5 +163,16 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
         },
       ),
     );
+  }
+
+  Color getRatingColor(String ratingStr) {
+    final rating = double.tryParse(ratingStr) ?? 0.0;
+    if (rating < 5) {
+      return Colors.red;
+    } else if (rating < 7) {
+      return Colors.yellow;
+    } else {
+      return Colors.green;
+    }
   }
 }
