@@ -10,9 +10,10 @@ import 'package:movie_app/prasentation/search_page/search_screen.dart';
 
 class Base extends StatelessWidget {
   final MovieRepository movieRepository;
-  Base({required this.movieRepository});
 
-  List<Widget> get _pages => [
+  Base({required this.movieRepository, super.key});
+
+  late final List<Widget> _pages = [
     HomeScreen(movieRepository: movieRepository),
     SearchScreen(),
     BookmarkScreen(),

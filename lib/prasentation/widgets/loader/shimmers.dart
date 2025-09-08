@@ -2,57 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ShimmerWidget extends StatelessWidget {
-  final double width;
-  final double height;
-  final bool isRounded;
-  final double borderRadius;
-  final bool useScreenFraction;
-  final ShapeBorder? customShape;
 
-  const ShimmerWidget({
-    Key? key,
-    required this.width,
-    required this.height,
-    this.isRounded = false,
-    this.borderRadius = 0.0,
-    this.useScreenFraction = false,
-    this.customShape,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final effectiveWidth = useScreenFraction ? screenSize.width * width : width;
-    final effectiveHeight = useScreenFraction ? screenSize.height * height : height;
-
-    return Shimmer.fromColors(
-      baseColor: Colors.grey[300]!,
-      highlightColor: Colors.grey[100]!,
-      child: Container(
-        width: effectiveWidth,
-        height: effectiveHeight,
-        decoration: isRounded
-            ? BoxDecoration(
-                borderRadius: BorderRadius.circular(borderRadius),
-                color: Colors.grey[300],
-              )
-            : BoxDecoration(
-                shape: customShape != null ? BoxShape.rectangle : BoxShape.rectangle,
-                color: Colors.grey[300],
-              ),
-        child: customShape != null
-            ? ClipRRect(
-                borderRadius: BorderRadius.circular(borderRadius),
-                child: Container(color: Colors.grey[300]),
-              )
-            : null,
-      ),
-    );
-  }
-}
-
-class ShimmerUtils {
+class ShimmerWidget {
   static Widget shimmerWidget({
     required double width,
     required double height,

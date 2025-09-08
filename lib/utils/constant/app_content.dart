@@ -11,3 +11,5 @@ class AppStrings {
   static const String noData = "No data available";
   static const String error = "Something went wrong!";
 }
+
+

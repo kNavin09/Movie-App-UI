@@ -15,6 +15,7 @@ void main() async {
   Hive.registerAdapter(MovieAdapter());
   await Hive.openBox<Movie>('movies');
   await Hive.openBox<Movie>('bookmarks');
+  await Hive.openBox('settingsBox');
   final dio = Dio();
   final tmdbApi = TMDBApiSource(dio, baseUrl: "https://api.themoviedb.org/3");
   final localDb = LocalDBSource();
@@ -26,16 +27,3 @@ void main() async {
 
   runApp(MovieApp(movieRepository: movieRepository));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

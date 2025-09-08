@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/data/repository/movie_repository.dart';
 import 'package:movie_app/utils/theme/theme_colors.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../bloc/movie_bloc/movie_bloc.dart';
@@ -55,7 +56,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: NetworkImage(
-                          "https://image.tmdb.org/t/p/w500${movie.posterPath}",
+                          "$baseUrl${movie.posterPath}",
                         ),
                         fit: BoxFit.cover,
                       ),

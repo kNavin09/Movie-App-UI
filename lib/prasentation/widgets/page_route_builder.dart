@@ -5,7 +5,6 @@ class SlidePageRoute<T> extends PageRouteBuilder<T> {
   final Offset beginOffset;
   final Offset reverseBeginOffset;
   final Curve curve;
-
   SlidePageRoute({
     required this.page,
     this.beginOffset = const Offset(1.0, 0.0),
@@ -17,13 +16,11 @@ class SlidePageRoute<T> extends PageRouteBuilder<T> {
            final offset = animation.status == AnimationStatus.reverse
                ? reverseBeginOffset
                : beginOffset;
-
            final tween = Tween(
              begin: offset,
              end: Offset.zero,
            ).chain(CurveTween(curve: curve));
            final offsetAnimation = animation.drive(tween);
-
            return SlideTransition(position: offsetAnimation, child: child);
          },
        );

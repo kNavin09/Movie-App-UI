@@ -2,6 +2,8 @@ import 'package:movie_app/data/modal/movie.dart';
 import 'package:movie_app/data/source/local_db_source.dart';
 import 'package:movie_app/data/source/tmdb_api_source.dart';
 
+const String baseUrl = "https://image.tmdb.org/t/p/w500";
+
 class MovieRepository {
   final TMDBApiSource remote;
   final LocalDBSource local;

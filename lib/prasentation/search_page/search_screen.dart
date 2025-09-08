@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/prasentation/movie_detail_page/movie_details_screen.dart';
+import 'package:movie_app/prasentation/widgets/comman_textform.dart';
 import 'package:movie_app/utils/constant/app_content.dart';
 import '../../bloc/movie_bloc/movie_bloc.dart';
 import '../../bloc/movie_bloc/movie_event.dart';
@@ -28,19 +29,8 @@ class SearchScreen extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8),
-            child: TextField(
-              style: const TextStyle(color: AppColors.white),
-              decoration: InputDecoration(
-                hintText: AppStrings.searchType,
-                hintStyle: TextStyle(color: AppColors.white.withOpacity(0.6)),
-                border: const OutlineInputBorder(),
-                enabledBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.white),
-                ),
-                focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.white),
-                ),
-              ),
+            child: CustomTextField(
+              hintText: AppStrings.searchType,
               onChanged: (query) {
                 bloc.add(SearchMovies(query));
               },
