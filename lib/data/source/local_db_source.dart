@@ -2,34 +2,65 @@ import 'package:hive/hive.dart';
 import 'package:movie_app/data/modal/movie.dart';
 
 class LocalDBSource {
-  final Box<Movie> movieBox = Hive.box<Movie>('movies');
-  final Box<Movie> bookmarkBox = Hive.box<Movie>('bookmarks');
+ 
+  static const trendingBox = 'trending_movies';
+  static const nowPlayingBox = 'now_playing_movies';
+  static const movieDetailsBox = 'movie_details';
+    static const bookmarksBox = 'bookmarked_movies';
 
-  // Save movies to the main box
-  Future<void> saveMovies(List<Movie> movies) async {
-    for (var movie in movies) {
-      await movieBox.put(movie.id, movie);
-    }
+
+  Future<void> cacheTrendingMovies(List<Movie> movies) async {
+    var box = await Hive.openBox<Movie>(trendingBox);
+    await box.clear();
+    await box.addAll(movies);
   }
 
-  // Retrieve all movies from the main box
-  List<Movie> getMovies() => movieBox.values.toList();
+  Future<List<Movie>> getCachedTrendingMovies() async {
+    var box = await Hive.openBox<Movie>(trendingBox);
+    return box.values.toList();
+  }
 
-  // Add a movie to bookmarks (box)
+  Future<void> cacheNowPlayingMovies(List<Movie> movies) async {
+    var box = await Hive.openBox<Movie>(nowPlayingBox);
+    await box.clear();
+    await box.addAll(movies);
+  }
+
+  Future<List<Movie>> getCachedNowPlayingMovies() async {
+    var box = await Hive.openBox<Movie>(nowPlayingBox);
+    return box.values.toList();
+  }
+
+  Future<void> cacheMovieDetails(Movie movie) async {
+    var box = await Hive.openBox<Movie>(movieDetailsBox);
+    await box.put(movie.id, movie);
+  }
+
+  Future<Movie?> getCachedMovieDetails(int id) async {
+    var box = await Hive.openBox<Movie>(movieDetailsBox);
+    return box.get(id);
+  }
+
+  Future<List<Movie>> getBookmarkedMovies() async {
+    var box = await Hive.openBox<Movie>(bookmarksBox);
+    return box.values.toList();
+  }
+
   Future<void> bookmarkMovie(Movie movie) async {
-    if (!bookmarkBox.containsKey(movie.id)) {
-      await bookmarkBox.put(movie.id, movie);
-    }
+    var box = await Hive.openBox<Movie>(bookmarksBox);
+    await box.put(movie.id, movie);
   }
 
-  // Remove a movie from bookmarks (box)
-  Future<void> unbookmarkMovie(int id) async {
-    await bookmarkBox.delete(id);
+  Future<void> unbookmarkMovie(int movieId) async {
+    var box = await Hive.openBox<Movie>(bookmarksBox);
+    await box.delete(movieId);
   }
-
-  // Retrieve all bookmarked movies (from box)
-  List<Movie> getBookmarkedMovies() => bookmarkBox.values.toList();
-
-  // Check if a movie is bookmarked
-  bool isBookmarked(int id) => bookmarkBox.containsKey(id);
 }
+
+
+
+
+
+
+
+

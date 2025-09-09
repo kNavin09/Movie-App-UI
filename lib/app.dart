@@ -15,7 +15,7 @@ class MovieApp extends StatelessWidget {
       value: movieRepository,
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (_) => MovieBloc(repo: movieRepository)),
+          BlocProvider(create: (_) => MovieBloc(repo: movieRepository!)),
         ],
         child: MaterialApp(
           title: "Movie App",

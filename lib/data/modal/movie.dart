@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 part 'movie.g.dart';
 
 @HiveType(typeId: 0)
-class Movie extends HiveObject {
+class Movie {
   @HiveField(0)
   final int id;
 
@@ -24,7 +24,7 @@ class Movie extends HiveObject {
   @HiveField(6)
   final String voteAverage;
 
-  Movie({
+  const Movie({
     required this.id,
     required this.title,
     required this.overview,
@@ -33,6 +33,8 @@ class Movie extends HiveObject {
     required this.originalLanguage,
     required this.voteAverage,
   });
+
+
   factory Movie.fromJson(Map<String, dynamic> json) => Movie(
         id: json['id'] ?? 0,
         title: json['title'] ?? '',

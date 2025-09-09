@@ -8,7 +8,7 @@ import 'package:movie_app/utils/theme/text_style.dart';
 import 'package:movie_app/utils/theme/theme_colors.dart';
 
 class BookmarkScreen extends StatefulWidget {
-const   BookmarkScreen({Key? key}) : super(key: key);
+  const BookmarkScreen({Key? key}) : super(key: key);
   @override
   _BookmarkScreenState createState() => _BookmarkScreenState();
 }

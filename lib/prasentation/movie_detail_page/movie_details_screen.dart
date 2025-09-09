@@ -28,6 +28,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
       backgroundColor: Colors.black,
       body: BlocBuilder<MovieBloc, MovieState>(
         builder: (context, state) {
+           
           if (state is MovieLoading) {
             return const Center(
               child: CircularProgressIndicator(color: AppColors.white),
